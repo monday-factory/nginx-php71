@@ -150,8 +150,8 @@ ADD xdebug.ini /usr/local/php/etc/php.d/xdebug.ini
 ADD nginx.conf /usr/local/nginx/conf/nginx.conf
 
 #Start
-ADD start.sh /start.sh
-RUN chmod +x /start.sh
+ADD start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 #Set port
 EXPOSE 80 443
