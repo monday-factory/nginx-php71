@@ -118,9 +118,10 @@ RUN cd /home/nginx-php && \
     make && \
     cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20151012/
 
+ADD ./php-fpm.conf /usr/local/php/etc/php-fpm.conf
+
 RUN cd /home/nginx-php/php-$PHP_VERSION && \
     cp php.ini-production /usr/local/php/etc/php.ini && \
-    cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
     cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
 
 RUN ln -s /usr/local/php/bin/php /usr/bin/php
