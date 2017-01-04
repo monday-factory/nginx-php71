@@ -10,6 +10,7 @@ RUN yum install -y gcc \
     automake \
     libtool \
     make \
+    cronie \
     cmake && \
     yum clean all
 
