@@ -11,6 +11,7 @@ RUN yum install -y gcc \
     libtool \
     make \
     cronie \
+    unzip \
     cmake && \
     yum clean all
 
@@ -43,7 +44,8 @@ RUN groupadd -r www && \
 RUN mkdir -p /home/nginx-php && cd $_ && \
     wget -c -O nginx.tar.gz http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     wget -O php.tar.gz http://php.net/distributions/php-$PHP_VERSION.tar.gz && \
-    curl -O -SL https://github.com/xdebug/xdebug/archive/XDEBUG_2_4_0RC3.tar.gz
+    curl -O -SL https://github.com/xdebug/xdebug/archive/XDEBUG_2_4_0RC3.tar.gz && \
+    curl -O -SL https://github.com/phpredis/phpredis/archive/php7.zip
 
 #Make install nginx
 RUN cd /home/nginx-php && \
@@ -118,6 +120,18 @@ RUN cd /home/nginx-php && \
     ./configure --enable-xdebug --with-php-config=/usr/local/php/bin/php-config && \
     make && \
     cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20151012/
+
+#Add redis extension
+RUN cd /home/nginx-php && \
+	unzip php7.zip
+
+RUN	cd /home/nginx-php/phpredis-php7 && \
+	/usr/local/php/bin/phpize && \
+	./configure --with-php-config=/usr/local/php/bin/php-config && \
+	make && make install && \
+	cp modules/redis.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20151012/
+
+RUN mkdir -p /usr/local/php/etc/php.d && chmod 0777 /usr/local/php/etc/php.d &&  echo 'extension=redis.so' > /usr/local/php/etc/php.d/redis.ini
 
 ADD ./php-fpm.conf /usr/local/php/etc/php-fpm.conf
 
