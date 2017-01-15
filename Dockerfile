@@ -142,7 +142,7 @@ ADD supervisord.conf /etc/supervisord.conf
 RUN cd / && rm -rf /home/nginx-php
 
 #Create web folder
-VOLUME ["/data/www", "/usr/local/nginx/conf/ssl", "/usr/local/nginx/conf/vhost", "/usr/local/php/etc/php.d"]
+VOLUME ["/data", "/usr/local/nginx/conf/ssl", "/usr/local/nginx/conf/vhost", "/usr/local/php/etc/php.d"]
 RUN chown -R www:www /data/www
 ADD index.php /data/www/index.php
 
