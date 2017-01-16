@@ -136,8 +136,9 @@ RUN mkdir -p /usr/local/php/etc/php.d && chmod 0777 /usr/local/php/etc/php.d && 
 ADD ./php-fpm.conf /usr/local/php/etc/php-fpm.conf
 
 RUN cd /home/nginx-php/php-$PHP_VERSION && \
-    cp php.ini-production /usr/local/php/etc/php.ini && \
     cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+
+ADD php.ini /usr/local/php/etc/php.ini
 
 RUN ln -s /usr/local/php/bin/php /usr/bin/php
 
