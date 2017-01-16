@@ -134,9 +134,7 @@ RUN	cd /home/nginx-php/phpredis-php7 && \
 RUN mkdir -p /usr/local/php/etc/php.d && chmod 0777 /usr/local/php/etc/php.d &&  echo 'extension=redis.so' > /usr/local/php/etc/php.d/redis.ini
 
 ADD ./php-fpm.conf /usr/local/php/etc/php-fpm.conf
-
-RUN cd /home/nginx-php/php-$PHP_VERSION && \
-    cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+ADD ./www.conf /usr/local/php/etc/php-fpm.d/www.conf
 
 ADD php.ini /usr/local/php/etc/php.ini
 
@@ -157,8 +155,8 @@ ADD supervisord.conf /etc/supervisord.conf
 RUN cd / && rm -rf /home/nginx-php
 
 #Create web folder
-VOLUME ["/data", "/usr/local/nginx/conf/ssl", "/usr/local/nginx/conf/vhost", "/usr/local/php/etc/php.d"]
-RUN chown -R www:www /data/www
+VOLUME ["/usr/local/nginx/conf/ssl", "/usr/local/nginx/conf/vhost", "/usr/local/php/etc/php.d"]
+RUN mkdir -p /data/www && chown -R www:www /data/www
 ADD index.php /data/www/index.php
 
 ADD xdebug.ini /usr/local/php/etc/php.d/xdebug.ini
@@ -175,6 +173,3 @@ EXPOSE 80 443
 
 #Start it
 ENTRYPOINT ["/start.sh"]
-
-#Start web server
-#CMD ["/bin/bash", "/start.sh"]
