@@ -120,7 +120,7 @@ RUN	cd /home/nginx-php/phpredis-php7 && \
 	/usr/local/php/bin/phpize && \
 	./configure --with-php-config=/usr/local/php/bin/php-config && \
 	make && make install && \
-	cp modules/redis.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20151012/
+	cp modules/redis.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/
 
 RUN mkdir -p /usr/local/php/etc/php.d && chmod 0777 /usr/local/php/etc/php.d &&  echo 'extension=redis.so' > /usr/local/php/etc/php.d/redis.ini
 
