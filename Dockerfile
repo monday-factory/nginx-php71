@@ -112,15 +112,6 @@ RUN cd /home/nginx-php && \
     --without-pear && \
     make && make install
 
-#Add xdebug extension
-RUN cd /home/nginx-php && \
-    tar -zxvf XDEBUG_2_4_0RC3.tar.gz && \
-    cd xdebug-XDEBUG_2_4_0RC3 && \
-    /usr/local/php/bin/phpize && \
-    ./configure --enable-xdebug --with-php-config=/usr/local/php/bin/php-config && \
-    make && \
-    cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20151012/
-
 #Add redis extension
 RUN cd /home/nginx-php && \
 	unzip php7.zip
