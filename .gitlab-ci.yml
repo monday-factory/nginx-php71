@@ -1,0 +1,11 @@
+build_image:
+    image: docker:1.12.3
+    services:
+        - docker:1.12.3-dind
+    script:
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.legerete.cz
+        - docker build -t registry.gitlab.legerete.cz/legerete/nginx-php71 .
+        - docker push registry.gitlab.legerete.cz/legerete/nginx-php71:latest
+    only:
+        - master
+        - develop
