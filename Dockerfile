@@ -44,7 +44,6 @@ RUN groupadd -r www && \
 RUN mkdir -p /home/nginx-php && cd $_ && \
     wget -c -O nginx.tar.gz http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     wget -O php.tar.gz http://php.net/distributions/php-$PHP_VERSION.tar.gz && \
-    curl -O -SL https://github.com/xdebug/xdebug/archive/XDEBUG_2_4_0RC3.tar.gz && \
     curl -O -SL https://github.com/phpredis/phpredis/archive/php7.zip
 
 #Make install nginx
@@ -149,8 +148,6 @@ RUN cd / && rm -rf /home/nginx-php
 VOLUME ["/usr/local/nginx/conf/ssl", "/usr/local/nginx/conf/vhost", "/usr/local/php/etc/php.d"]
 RUN mkdir -p /data/www && chown -R www:www /data/www
 ADD index.php /data/www/index.php
-
-ADD xdebug.ini /usr/local/php/etc/php.d/xdebug.ini
 
 #Update nginx config
 ADD nginx.conf /usr/local/nginx/conf/nginx.conf
