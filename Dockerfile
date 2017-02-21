@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER Petr Besir Horacek <petr.horacek@legerete.cz>
+MAINTAINER Petr Besir Horacek <petr@mondayfactory.cz>
 
 ENV NGINX_VERSION 1.11.1
 ENV PHP_VERSION 7.1.1
