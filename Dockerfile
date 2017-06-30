@@ -1,8 +1,8 @@
 FROM centos:7
 MAINTAINER Petr Besir Horacek <petr@mondayfactory.cz>
 
-ENV NGINX_VERSION 1.11.1
-ENV PHP_VERSION 7.1.1
+ENV NGINX_VERSION 1.11.10
+ENV PHP_VERSION 7.1.2
 
 RUN yum install -y gcc \
     gcc-c++ \
@@ -109,7 +109,12 @@ RUN cd /home/nginx-php && \
     --disable-debug \
     --enable-cli \
     --without-pear && \
+<<<<<<< Updated upstream
     make && make install
+=======
+    make && make install && make test && \
+    ln -s /usr/local/php/bin/php /usr/bin/php
+>>>>>>> Stashed changes
 
 #Add redis extension
 RUN cd /home/nginx-php && \
