@@ -164,5 +164,7 @@ RUN chmod +x ./start.sh
 #Set port
 EXPOSE 80 443
 
+WORKDIR /data
+
 #Start it
 ENTRYPOINT ["/start.sh"]
