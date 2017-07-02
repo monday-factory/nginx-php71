@@ -109,7 +109,7 @@ RUN cd /home/nginx-php && \
     --disable-debug \
     --enable-cli \
     --without-pear && \
-    make && make install && make test && \
+    make && make install && make test > /dev/null && \
     ln -s /usr/local/php/bin/php /usr/bin/php
 
 #Add redis extension
