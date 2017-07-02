@@ -109,12 +109,8 @@ RUN cd /home/nginx-php && \
     --disable-debug \
     --enable-cli \
     --without-pear && \
-<<<<<<< Updated upstream
-    make && make install
-=======
     make && make install && make test && \
     ln -s /usr/local/php/bin/php /usr/bin/php
->>>>>>> Stashed changes
 
 #Add redis extension
 RUN cd /home/nginx-php && \
