@@ -87,6 +87,7 @@ RUN cd /home/nginx-php && \
     --with-mhash \
     --enable-fpm \
     --enable-xml \
+    --enable-calendar \
     --enable-shmop \
     --enable-sysvsem \
     --enable-inline-optimization \
